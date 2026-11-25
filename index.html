@@ -327,7 +327,7 @@
 
         <div class="cake-reveal-card" id="cake-reveal">
           <div class="ai-couple-frame">
-            <img src="1000023957.png" alt="HAPPY BIRTHDAY HARSHIKA">
+            <img src="file_00000000ae1c82118dbc6f8e88a6798f.png" alt="HAPPY BIRTHDAY HARSHIKA">
           </div>
           <h3 style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 0.8px; color: #ffb6c1; text-transform: uppercase;">HAPPY BIRTHDAY HARSHIKA 🌷</h3>
           <p style="color: #ffb6c1; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
@@ -452,12 +452,10 @@
         const hours = Math.floor(diffMs / (1000 * 60 * 60));
         const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-        // Exact calendar years calculation based on DOB (26 Nov 2002)
         let years = now.getFullYear() - 2002;
         if (now.getMonth() < 10 || (now.getMonth() === 10 && now.getDate() < 26)) {
           years--;
         }
-        // Ensure 24 displays cleanly for her 24th birthday celebration
         if (years < 24 && now.getFullYear() >= 2026 && now.getMonth() === 10 && now.getDate() >= 25) {
           years = 24;
         }
