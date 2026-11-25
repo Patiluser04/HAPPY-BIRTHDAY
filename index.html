@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Special Surprise For You 🎁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>A Special Surprise For Harshika 🎁</title>
 
-  <!-- 🛡️ INSTAGRAM PREVIEW TAGS -->
-  <meta property="og:title" content="A Special Surprise For You 💖" />
-  <meta property="og:description" content="Tap to unlock your birthday surprise ✨" />
-  <meta property="og:image" content="https://img.icons8.com/emoji/512/wrapped-gift.png" />
+  <!-- WhatsApp & Instagram Link Preview Card -->
+  <meta property="og:title" content="A Special Birthday Surprise For Harshika 🎂✨" />
+  <meta property="og:description" content="Tap to unlock your special birthday surprise! 💌🎁" />
   <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#2a083b" />
 
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Poppins', sans-serif;
@@ -23,7 +23,6 @@
       padding-bottom: 40px; overflow-x: hidden; position: relative;
     }
 
-    /* 🌸 FLOATING BACKGROUND EMOJIS */
     #floating-bg {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none; z-index: 1; overflow: hidden;
@@ -40,7 +39,6 @@
       100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* 🔐 LOCK SCREEN */
     #lock-screen {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: #180324; z-index: 9999; display: flex;
@@ -62,17 +60,12 @@
       border-radius: 25px; font-weight: 600; font-size: 1rem;
       margin-top: 15px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,117,140,0.5);
     }
-    #pass-error {
-      color: #ff4d6d; font-size: 0.85rem; margin-top: 10px; display: none; font-weight: 600;
-    }
+    #pass-error { color: #ff4d6d; font-size: 0.85rem; margin-top: 10px; display: none; font-weight: 600; }
 
     .container { max-width: 500px; margin: 0 auto; padding: 15px; display: none; position: relative; z-index: 2; }
-    
-    /* 👑 CLEAN HEADING */
-    h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ffb6c1; margin-top: 10px; }
+    h1 { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: #ffb6c1; margin-top: 10px; }
     .subtitle { color: #f3e5f5; font-size: 0.95rem; margin-bottom: 10px; }
 
-    /* 📊 AGE STATS CARD */
     .stats-card {
       background: rgba(0, 0, 0, 0.25); border-radius: 18px; padding: 12px 14px;
       margin: 12px 0 16px 0; border: 1px solid rgba(255, 182, 193, 0.3);
@@ -83,7 +76,6 @@
     .stat-val { font-weight: 700; font-size: 1rem; color: #ffd1dc; }
     .stat-lbl { font-size: 0.65rem; color: #e1bee7; letter-spacing: 0.8px; margin-top: 2px; }
 
-    /* 🎵 MUSIC BUTTON */
     .music-btn {
       position: fixed; top: 15px; right: 15px; background: rgba(255, 117, 140, 0.9);
       border: none; color: white; padding: 10px 18px; border-radius: 25px;
@@ -94,22 +86,29 @@
     .page-step { display: none; animation: fadeIn 0.6s ease-in-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* 📸 PHOTO GALLERY */
     .slideshow-container {
-      position: relative; width: 100%; aspect-ratio: 4 / 5; margin: 15px 0 20px 0;
+      position: relative; width: 100%; aspect-ratio: 3 / 4; margin: 15px 0 20px 0;
       border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-      border: 2px solid rgba(255, 182, 193, 0.4); background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 182, 193, 0.4); background: #1a0326;
     }
-    .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; }
+    .slide {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0; transition: opacity 0.8s ease-in-out; overflow: hidden;
+    }
     .slide.active { opacity: 1; }
-    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .slide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 4s ease-out;
+    }
+    .slide.active img.trim-corner {
+      transform: scale(1.07);
+    }
     .caption-overlay {
-      position: absolute; bottom: 0; left: 0; width: 100%;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #ffd1dc;
-      padding: 20px 15px 12px 15px; font-size: 0.95rem; font-weight: 600;
+      position: absolute; bottom: 0; left: 0; width: 100%; z-index: 3;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85)); color: #ffd1dc;
+      padding: 25px 15px 14px 15px; font-size: 0.95rem; font-weight: 600;
     }
 
-    /* 🎂 CAKE SECTION */
     .cake-section {
       background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 30px 20px;
       margin: 15px 0 20px 0; backdrop-filter: blur(10px); border: 1px solid rgba(255, 182, 193, 0.3);
@@ -126,13 +125,14 @@
     .pink-cake-wrapper { width: 150px; height: 150px; margin: 0 auto; position: relative; display: flex; align-items: center; justify-content: center; }
     .pink-cake-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(255, 117, 140, 0.5)); }
 
-    /* 📸 PERFECT AI COUPLE PHOTO FRAME */
     .ai-couple-frame {
-      width: 100%; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden;
+      width: 100%; aspect-ratio: 3 / 4; border-radius: 18px; overflow: hidden;
       border: 2px solid rgba(255, 182, 193, 0.6); margin-bottom: 15px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.4); background: #1a0326;
     }
-    .ai-couple-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ai-couple-frame img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block;
+    }
 
     .cake-reveal-card {
       display: none; background: linear-gradient(135deg, rgba(255, 117, 140, 0.25), rgba(255, 182, 193, 0.15));
@@ -140,7 +140,6 @@
       animation: fadeIn 0.8s ease-in-out;
     }
 
-    /* 💌 ENVELOPE & LETTER */
     .envelope-box {
       background: rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 35px 20px;
       margin: 20px 0; border: 1px solid rgba(255, 182, 193, 0.3); cursor: pointer; backdrop-filter: blur(10px);
@@ -153,7 +152,6 @@
     }
     .signature { text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #ffb6c1 !important; margin-top: 15px; }
 
-    /* 🎟️ BIRTHDAY COUPONS */
     .coupons-container { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
     .ticket-card {
       position: relative;
@@ -184,7 +182,6 @@
     .ticket-card.claimed .ticket-title { color: #a5d6a7; }
     .ticket-card.claimed .ticket-btn { background: linear-gradient(45deg, #4caf50, #81c784); }
 
-    /* 🔔 REDEEM POPUP MODAL */
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
@@ -202,7 +199,6 @@
     .modal-graphic { font-size: 70px; margin-bottom: 10px; display: block; animation: bounce 1s infinite alternate; }
     @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
 
-    /* BUTTONS */
     .action-btn {
       background: linear-gradient(45deg, #ff758c, #ff7eb3); border: none; color: white;
       padding: 12px 30px; border-radius: 25px; font-weight: 600; cursor: pointer; margin-top: 10px;
@@ -219,15 +215,13 @@
 
   <div id="floating-bg"></div>
 
-  <!-- 🎵 BACKGROUND SONG FILE -->
   <audio id="bg-music" src="song.mp3" loop preload="auto" playsinline webkit-playsinline></audio>
 
-  <!-- 🔐 LOCK SCREEN -->
   <div id="lock-screen">
     <div class="lock-card">
       <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: #ffb6c1;">Enter Secret Code 💌</h2>
-      <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 5px;">A special surprise is waiting for you!</p>
-      <input type="password" id="pass-code" class="pass-input" placeholder="Enter PIN Here">
+      <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 5px;">A special surprise is waiting for Harshika!</p>
+      <input type="password" inputmode="numeric" id="pass-code" class="pass-input" placeholder="Enter PIN Here">
       <p id="pass-error">Incorrect Password! Try again.</p>
       <button class="pass-btn" onclick="checkPass()">Unlock Surprise 💖</button>
     </div>
@@ -235,84 +229,75 @@
 
   <button class="music-btn" id="music-btn" onclick="toggleMusic(event)">🎵 Pause Song</button>
 
-  <!-- 🔔 DYNAMIC COUPON REDEEM POPUP -->
   <div class="modal-overlay" id="coupon-modal">
     <div class="modal-card">
       <span class="modal-graphic" id="modal-graphic">🍦</span>
       <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;" id="modal-title">Coupon Redeemed!</h3>
       <p style="color: #e1bee7; font-size: 0.88rem; line-height: 1.5; margin: 12px 0 20px 0;" id="modal-desc">
-        Take a screenshot of this page & send it to Nilesh to claim your treat! 📸💖
+        Take a screenshot of this page to claim your treat! 📸💖
       </p>
       <button class="action-btn" onclick="closeModal()">Got it! 💖</button>
     </div>
   </div>
 
-  <!-- MAIN CONTAINER -->
   <div class="container" id="main-content">
-    
-    <!-- 👑 CLEAN HEADING -->
-    <h1>Happy Birthday,</h1>
-    <p class="subtitle"> 20 Jan 2000</p>
+    <h1>Happy Birthday, HARSHIKA 🌷</h1>
+    <p class="subtitle">26 November 2002</p>
 
-    <!-- 📊 AGE STATS COUNTER CARD -->
     <div class="stats-card">
       <div class="stats-title">The World Has Been Better Since ❤️</div>
       <div class="stats-grid">
-        <div class="stat-item"><div class="stat-val" id="st-years">20</div><div class="stat-lbl">YEARS</div></div>
-        <div class="stat-item"><div class="stat-val" id="st-days">7,304</div><div class="stat-lbl">DAYS</div></div>
-        <div class="stat-item"><div class="stat-val" id="st-hours">1,75,314</div><div class="stat-lbl">HOURS</div></div>
-        <div class="stat-item"><div class="stat-val" id="st-mins">1,05,18,870</div><div class="stat-lbl">MINUTES</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-years">24</div><div class="stat-lbl">YEARS</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-days">8,765</div><div class="stat-lbl">DAYS</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-hours">2,10,360</div><div class="stat-lbl">HOURS</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-mins">1,26,21,600</div><div class="stat-lbl">MINUTES</div></div>
       </div>
     </div>
 
-    <!-- 📄 STEP 1: PHOTO GALLERY SLIDESHOW -->
+    <!-- STEP 1: SLIDESHOW PHOTOS WITH CUSTOM FRAMING -->
     <div class="page-step" id="step-1" style="display: block;">
       <div class="slideshow-container">
         <div class="slide active">
-          <img src="https://i.ibb.co/bj5C9YSH/In-Shot-20260421-090251964.jpg" alt=" Photo 1">
+          <img src="1000023882.jpg" class="trim-corner" style="object-position: center 22%;" alt="Harshika 1">
           <div class="caption-overlay">Pure smile that brightens up everything! 💖</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/fzgbNk3H/rosy-serenity-14041220-192948568.webp" alt=" Photo 2">
-          <div class="caption-overlay"> Grace 🌸</div>
+          <img src="1000023883.jpg" class="trim-corner" style="object-position: center 15%;" alt="Harshika 2">
+          <div class="caption-overlay">Elegance & Grace 🌸</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/wN3ZN51c/IMG-4525.avif" alt=" Photo 3">
+          <img src="1000023884.jpg" class="trim-corner" style="object-position: center 18%;" alt="Harshika 3">
           <div class="caption-overlay">Always shining so bright! 🌟</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/6RRnGkvf/IMG20250309110642.avif" alt=" Photo 4">
-          <div class="caption-overlay">Cute moments & unforgettable memories! 💫</div>
+          <img src="1000023885.jpg" class="trim-corner" style="object-position: center 12%;" alt="Harshika 4">
+          <div class="caption-overlay">Stunning in every single frame ✨</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/TM7pWDNX/In-Shot-20260422-010422598.jpg" alt="Photo 5">
-          <div class="caption-overlay">Stylish, sweet & extra special! 🎀</div>
+          <img src="1000023886.jpg" class="trim-corner" style="object-position: center 20%;" alt="Harshika 5">
+          <div class="caption-overlay">Cutest smile & sweetest vibe 🌷</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/gFSq2LZw/IMG-20260809-103724-967.jpg" alt=" Photo 6">
-          <div class="caption-overlay">Elegance in every picture! </div>
+          <img src="1000023887.jpg" class="trim-corner" style="object-position: center 18%;" alt="Harshika 6">
+          <div class="caption-overlay">Simply adorable! 🎀</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/3YjYG25j/IMG-20260809-103842-470.jpg" alt=" Photo 7">
-          <div class="caption-overlay">Keeping the vibe happy & positive! 💗</div>
+          <img src="1000023888.jpg" class="trim-corner" style="object-position: center 22%;" alt="Harshika 7">
+          <div class="caption-overlay">Style & charm unmatched 💫</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/mVkgjQxd/IMG-20260809-103847-079.jpg" alt=" Photo 8">
-          <div class="caption-overlay">Simply gorgeous & beautiful! 🌸</div>
+          <img src="1000023889.jpg" class="trim-corner" style="object-position: center 20%;" alt="Harshika 8">
+          <div class="caption-overlay">Keep smiling always! 💗</div>
         </div>
         <div class="slide">
-          <img src="https://i.ibb.co/KjVdZR90/IMG-20260809-103854-588.jpg" alt=" Photo 9">
-          <div class="caption-overlay">Making every moment magical! 🌸</div>
-        </div>
-        <div class="slide">
-          <img src="https://i.ibb.co/jPzttCyJ/IMG-20260809-103638-156.jpg" alt=" Photo 10">
-          <div class="caption-overlay">Happy Birthday </div>
+          <img src="1000023890.jpg" style="object-position: center 20%;" alt="Harshika 9">
+          <div class="caption-overlay">Graceful & timeless 🤍</div>
         </div>
       </div>
       <button class="next-btn" onclick="goToStep(2)">Next: Cut the Cake 🎂</button>
     </div>
 
-    <!-- 📄 STEP 2: PINK CAKE CUTTING -->
+    <!-- STEP 2: PINK CAKE CUTTING -->
     <div class="page-step" id="step-2">
       <div class="cake-section">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1;">Make a Wish & Cut the Cake!</h2>
@@ -340,13 +325,10 @@
         <button class="action-btn" id="cut-btn" onclick="cutCake()">Blow Candles & Cut Cake 💖</button>
 
         <div class="cake-reveal-card" id="cake-reveal">
-          
-          <!-- 📸 PERFECT AI COUPLE PHOTO 3 -->
           <div class="ai-couple-frame">
-            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600" alt="Cake Cutting Celebration">
+            <img src="1000023891.jpg" alt="Happy Birthday Harshika">
           </div>
-
-          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday</h3>
+          <h3 style="font-family: 'Dancing Script', cursive; font-size: 2.4rem; color: #ffb6c1;">Happy Birthday HARSHIKA 🌷</h3>
           <p style="color: #ffb6c1; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
             May all your dreams come true & your life be filled with endless sweetness, love, and laughter! 💖
           </p>
@@ -355,7 +337,7 @@
       <button class="next-btn" id="next-to-letter" onclick="goToStep(3)" style="display: none;">Next: Read Special Note 💌</button>
     </div>
 
-    <!-- 📄 STEP 3: HIDDEN LETTER -->
+    <!-- STEP 3: HIDDEN LETTER -->
     <div class="page-step" id="step-3">
       <div id="envelope-wrapper" class="envelope-box" onclick="openLetter()">
         <span class="envelope-icon">💌</span>
@@ -366,20 +348,19 @@
       <div class="letter-box" id="letter-content">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ffb6c1; margin-bottom: 15px; text-align: center;">A Little Note For You 💌</h2>
         <div id="typed-letter-text" style="line-height: 1.8; color: #ffb6c1 !important; font-size: 0.95rem;"></div>
-        <div class="signature" id="typed-signature" style="display: none;">~ Raj 🫂</div>
+        <div class="signature" id="typed-signature" style="display: none;"></div>
       </div>
 
       <button class="next-btn" id="next-to-coupons" onclick="goToStep(4)" style="display: none;">Next: Unlock Birthday Gift Coupons 🎟️✨</button>
     </div>
 
-    <!-- 📄 STEP 4: BIRTHDAY COUPONS PAGE -->
+    <!-- STEP 4: COUPONS -->
     <div class="page-step" id="step-4">
       <div class="cake-section">
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ffb6c1;">Your Birthday Coupons 🎟️✨</h2>
         <p style="color: #e1bee7; font-size: 0.85rem; margin-top: 4px;">Tap any ticket to claim your special surprise!</p>
 
         <div class="coupons-container">
-          
           <div class="ticket-card" onclick="claimCoupon(this, 'icecream')">
             <div class="ticket-content">
               <div class="ticket-title">1 Free Ice Cream Date 🍦</div>
@@ -403,7 +384,6 @@
             </div>
             <button class="ticket-btn">Claim 💖</button>
           </div>
-
         </div>
       </div>
 
@@ -413,12 +393,11 @@
   </div>
 
   <script>
-    const MY_SECRET_PASSWORD = "1234";
+    const MY_SECRET_PASSWORD = "26112002";
 
     let isPlaying = false;
     const bgAudio = document.getElementById('bg-music');
 
-    /* 🛑 AUTO PAUSE WHEN EXITING PAGE */
     function forcePauseAudio() {
       if (bgAudio) { bgAudio.pause(); isPlaying = false; }
       const btn = document.getElementById('music-btn');
@@ -429,7 +408,6 @@
     window.addEventListener('pagehide', forcePauseAudio);
     window.addEventListener('beforeunload', forcePauseAudio);
 
-    /* 🎟️ CLAIM & OPEN POPUP FUNCTION FOR COUPONS */
     function claimCoupon(cardElement, type) {
       cardElement.classList.add('claimed');
       cardElement.querySelector('.ticket-btn').innerText = "Claimed 🎉";
@@ -441,15 +419,15 @@
       if (type === 'icecream') {
         graphicEl.innerText = "🍦🍨✨";
         titleEl.innerText = "Ice Cream Date Unlocked!";
-        descEl.innerText = "Yummy Ice Cream treat ready! Take a screenshot & send it to Nilesh to claim 🍧💖";
+        descEl.innerText = "Yummy Ice Cream treat ready! Take a screenshot to claim 🍧💖";
       } else if (type === 'movie') {
         graphicEl.innerText = "🎬🍿✨";
         titleEl.innerText = "Movie Night Unlocked!";
-        descEl.innerText = "Popcorn & Movie ready! Take a screenshot & tell Nilesh which movie you want to watch 🎥💖";
+        descEl.innerText = "Popcorn & Movie ready! Take a screenshot to claim 🎥💖";
       } else if (type === 'wish') {
         graphicEl.innerText = "🔮✨🌟";
         titleEl.innerText = "1 Magic Wish Granted!";
-        descEl.innerText = "Ask for literally anything! Take a screenshot & send your wish to Nilesh 💌💖";
+        descEl.innerText = "Ask for literally anything! Take a screenshot to claim 💌💖";
       }
 
       document.getElementById('coupon-modal').style.display = 'flex';
@@ -465,7 +443,7 @@
 
     function calcAgeStats() {
       try {
-        const dob = new Date(2005, 7, 12);
+        const dob = new Date(2002, 10, 26);
         const now = new Date();
         const diffMs = now - dob;
 
@@ -481,7 +459,7 @@
       } catch(e) { console.log(e); }
     }
 
-    const FULL_LETTER_TEXT = `Happy Birthday\n\nYou’re not just my favourite person, you’re someone who makes my life a little brighter just by being in it. 💗\n\nI may not always find the right words, but you truly mean a lot to me. I hope you always stay happy, achieve all your dreams, and never lose that beautiful smile. ✨\n\nThank you for being such a special part of my life. Your friendship means more to me than you know, and I never want to lose you. 🤍\n\nHappy Birthday once again 🥳💗\nStay happy, stay blessed, and always keep smiling. 🌸\n\n— From someone who truly cares about you. 🤍`;
+    const FULL_LETTER_TEXT = `Happy Birthday, HARSHIKA! 🎂🤍\n\nYou’re not just my favourite person, you’re someone who makes my life a little brighter just by being in it. 💗\n\nI may not always find the right words, but you truly mean a lot to me. I hope you always stay happy, achieve all your dreams, and never lose that beautiful smile. ✨\n\nThank you for being such a special part of my life. Your friendship means more to me than you know, and I never want to lose you. 🤍\n\nHappy Birthday once again, HARSHIKA! 🥳💗\nStay happy, stay blessed, and always keep smiling. 🌸\n\n— From someone who truly cares about you. 🤍`;
 
     let typingIndex = 0;
     let isTypingActive = false;
@@ -510,7 +488,6 @@
           }
           typingIndex++;
 
-          /* 📜 AUTO SCROLL WITH TYPING */
           window.scrollTo({
             top: document.body.scrollHeight,
             behavior: 'smooth'
@@ -522,7 +499,6 @@
           if (sigContainer) sigContainer.style.display = 'block';
           if (nextBtn) nextBtn.style.display = 'inline-block';
 
-          /* 📜 SCROLL TO BOTTOM AFTER BUTTON APPEARS */
           setTimeout(() => {
             window.scrollTo({
               top: document.body.scrollHeight,
@@ -562,7 +538,6 @@
       calcAgeStats();
     });
 
-    /* 🔐 UNLOCK & PLAY SONG AT EXACT 0.90x SPEED */
     function checkPass() {
       const pin = document.getElementById('pass-code').value.trim();
       const errEl = document.getElementById('pass-error');
@@ -572,7 +547,7 @@
         
         if (bgAudio) {
           bgAudio.currentTime = 0;
-          bgAudio.playbackRate = 0.90; // Exactly 0.90x Speed
+          bgAudio.playbackRate = 0.90;
           bgAudio.play().then(() => {
             bgAudio.playbackRate = 0.90;
             isPlaying = true;
@@ -613,9 +588,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* 🔄 RESET ALL STEPS & SONG BACK TO ORIGINAL STATE */
     function resetAll() {
-      // 🎵 Reset Audio to 0:00 Sec & Play from Beginning
       if (bgAudio) {
         bgAudio.currentTime = 0;
         bgAudio.playbackRate = 0.90;
@@ -626,7 +599,6 @@
         }).catch(e => console.log(e));
       }
 
-      // Reset Cake
       const flame = document.getElementById('flame-icon');
       if (flame) flame.style.display = 'block';
       const cutBtn = document.getElementById('cut-btn');
@@ -652,7 +624,6 @@
         `;
       }
 
-      // Reset Letter
       const env = document.getElementById('envelope-wrapper');
       if (env) env.style.display = 'block';
       const letContent = document.getElementById('letter-content');
@@ -666,14 +637,12 @@
       isTypingActive = false;
       typingIndex = 0;
 
-      // Reset Coupons
       document.querySelectorAll('.ticket-card').forEach(card => {
         card.classList.remove('claimed');
         const btn = card.querySelector('.ticket-btn');
         if (btn) btn.innerText = 'Claim 💖';
       });
 
-      // Go back to Step 1
       goToStep(1);
     }
 
@@ -685,7 +654,7 @@
         slides[currentSlide].classList.remove('active');
         currentSlide = (currentSlide + 1) % slides.length;
         slides[currentSlide].classList.add('active');
-      }, 3500);
+      }, 3000);
     }
 
     function triggerFireworks() {
@@ -718,7 +687,6 @@
       document.getElementById('next-to-letter').style.display = 'inline-block';
       triggerFireworks();
 
-      /* 📜 AUTO SCROLL TO REVEALED PHOTO CARD */
       setTimeout(() => {
         revealCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 200);
