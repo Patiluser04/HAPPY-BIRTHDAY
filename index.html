@@ -125,13 +125,14 @@
     .pink-cake-wrapper { width: 150px; height: 150px; margin: 0 auto; position: relative; display: flex; align-items: center; justify-content: center; }
     .pink-cake-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(255, 117, 140, 0.5)); }
 
+    /* Full original photo without cropping top or bottom */
     .ai-couple-frame {
-      width: 100%; aspect-ratio: 3 / 4; border-radius: 18px; overflow: hidden;
+      width: 100%; border-radius: 18px; overflow: hidden;
       border: 2px solid rgba(255, 182, 193, 0.6); margin-bottom: 15px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.4); background: #1a0326;
     }
     .ai-couple-frame img {
-      width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block;
+      width: 100%; height: auto; display: block;
     }
 
     .cake-reveal-card {
@@ -248,9 +249,9 @@
       <div class="stats-title">The World Has Been Better Since ❤️</div>
       <div class="stats-grid">
         <div class="stat-item"><div class="stat-val" id="st-years">24</div><div class="stat-lbl">YEARS</div></div>
-        <div class="stat-item"><div class="stat-val" id="st-days">8,765</div><div class="stat-lbl">DAYS</div></div>
-        <div class="stat-item"><div class="stat-val" id="st-hours">2,10,360</div><div class="stat-lbl">HOURS</div></div>
-        <div class="stat-item"><div class="stat-val" id="st-mins">1,26,21,600</div><div class="stat-lbl">MINUTES</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-days">8,766</div><div class="stat-lbl">DAYS</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-hours">2,10,384</div><div class="stat-lbl">HOURS</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-mins">1,26,23,040</div><div class="stat-lbl">MINUTES</div></div>
       </div>
     </div>
 
@@ -290,7 +291,7 @@
           <div class="caption-overlay">Keep smiling always! 💗</div>
         </div>
         <div class="slide">
-          <img src="IMG_20261125_214549_697.jpg" style="object-position: center 20%;" alt="HARSHIKA 9">
+          <img src="IMG_20261125_214549_697.jpg" class="trim-corner" style="object-position: center 20%;" alt="HARSHIKA 9">
           <div class="caption-overlay">Graceful & timeless 🤍</div>
         </div>
       </div>
@@ -326,7 +327,7 @@
 
         <div class="cake-reveal-card" id="cake-reveal">
           <div class="ai-couple-frame">
-            <img src="IMG_20261125_214552_592.jpg" alt="HAPPY BIRTHDAY HARSHIKA">
+            <img src="1000023957.png" alt="HAPPY BIRTHDAY HARSHIKA">
           </div>
           <h3 style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: 0.8px; color: #ffb6c1; text-transform: uppercase;">HAPPY BIRTHDAY HARSHIKA 🌷</h3>
           <p style="color: #ffb6c1; font-size: 0.95rem; line-height: 1.5; margin-top: 8px;">
@@ -443,14 +444,23 @@
 
     function calcAgeStats() {
       try {
-        const dob = new Date(2002, 10, 26);
+        const dob = new Date(2002, 10, 26, 0, 0, 0);
         const now = new Date();
-        const diffMs = now - dob;
+        const diffMs = Math.max(0, now - dob);
 
         const mins = Math.floor(diffMs / (1000 * 60));
         const hours = Math.floor(diffMs / (1000 * 60 * 60));
         const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-        const years = Math.floor(days / 365.25);
+
+        // Exact calendar years calculation based on DOB (26 Nov 2002)
+        let years = now.getFullYear() - 2002;
+        if (now.getMonth() < 10 || (now.getMonth() === 10 && now.getDate() < 26)) {
+          years--;
+        }
+        // Ensure 24 displays cleanly for her 24th birthday celebration
+        if (years < 24 && now.getFullYear() >= 2026 && now.getMonth() === 10 && now.getDate() >= 25) {
+          years = 24;
+        }
 
         document.getElementById('st-years').innerText = years;
         document.getElementById('st-days').innerText = days.toLocaleString('en-IN');
@@ -536,6 +546,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       createFloatingBg();
       calcAgeStats();
+      setInterval(calcAgeStats, 15000);
     });
 
     function checkPass() {
